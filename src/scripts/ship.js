@@ -9,6 +9,14 @@ class Ship{
 
     hit = () => {
         this.timesHit += 1
+    };
+
+    evalSunk = () => {
+        if (this.timesHit === this.length) {
+            this.isSunk = 'Yes';
+        } else {
+            return
+        }
     }
 }
 
