@@ -34,5 +34,7 @@ describe('ship tests', () => {
         expect(testShip.isSunk).toBe('No');      
     });
 
+    
+
 
 } )
