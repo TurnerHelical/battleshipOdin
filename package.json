@@ -1,24 +1,24 @@
 {
-  "name": "weatherapp",
+  "name": "battleshipodin",
   "version": "1.0.0",
   "description": "An app to make use of the Visual Crossing API to track and display weather",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "lint": "eslint .",
     "format": "prettier --write ."
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/TurnerHelical/weatherApp.git"
+    "url": "git+https://github.com/TurnerHelical/battleshipOdin.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/TurnerHelical/weatherApp/issues"
+    "url": "https://github.com/TurnerHelical/battleshipOdin/issues"
   },
-  "homepage": "https://github.com/TurnerHelical/weatherApp#readme",
+  "homepage": "https://github.com/TurnerHelical/battleshipOdin#readme",
   "devDependencies": {
     "@eslint/js": "^9.28.0",
     "css-loader": "^7.1.2",
@@ -30,6 +30,11 @@
     "style-loader": "^4.0.0",
     "webpack": "^5.99.9",
     "webpack-cli": "^6.0.1",
-    "webpack-dev-server": "^5.2.2"
+    "webpack-dev-server": "^5.2.2",
+    "@babel/core": "^7.27.4",
+    "@babel/preset-env": "^7.27.2",
+    "babel-jest": "^30.0.2",
+    "jest": "^30.0.2",
+    "node": "^20.19.3"
   }
 }
