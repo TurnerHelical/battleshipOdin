@@ -3,17 +3,29 @@ class Ship {
     this.shipName = shipName;
     this.length = length;
     this.timesHit = 0;
+    this.hitLocation = [];
     this.isSunk = "No";
     this.location = "";
   }
 
-  hit = () => {
-    this.timesHit += 1;
+  hit = (coords) => {
+    
+    if (this.hitLocation.find(coords) === coords) {
+        console.log('You already tried here! Try again.');
+        // Allow user to try a different spot
+    } else if (this.isSunk === 'Yes') {
+        console.log('this ship is sunk but you should not see this message')
+       
+    } else {
+        this.timesHit += 1;
+        this.hitLocation.push(coords);
+    }
   };
 
   evalSunk = () => {
     if (this.timesHit === this.length) {
       this.isSunk = "Yes";
+      return 'true';
     } else {
       return;
     }
