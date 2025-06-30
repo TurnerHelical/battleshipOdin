@@ -1,24 +1,43 @@
-class Ship{
+class Ship {
+  constructor(shipName, length) {
+    this.shipName = shipName;
+    this.length = length;
+    this.timesHit = 0;
+    this.isSunk = "No";
+    this.location = "";
+  }
 
-    constructor(shipName, length, location){
-        this.shipName = shipName;
-        this.length = length;
-        this.timesHit = 0;
-        this.isSunk = 'No';
-        this.location = location;
+  hit = () => {
+    this.timesHit += 1;
+  };
+
+  evalSunk = () => {
+    if (this.timesHit === this.length) {
+      this.isSunk = "Yes";
+    } else {
+      return;
     }
+  };
 
-    hit = () => {
-        this.timesHit += 1
+  createShips = () => {
+    const p1AC = new Ship("p1AircraftCarrier", 5);
+    const p2AC = new Ship("p2AircraftCarrier", 5);
+    const p1B = new Ship("p1Battleship", 4);
+    const p2B = new Ship("p2Battleship", 4);
+    const p1C = new Ship("p1Cruiser", 3);
+    const p2C = new Ship("p2Cruiser", 3);
+    const p1S = new Ship("p1Submarine", 3);
+    const p2S = new Ship("p2Submarine", 3);
+    const p1D = new Ship("p1Destroyer", 2);
+    const p2D = new Ship("p2Destroyer", 2);
+    let p1Ships = [p1AC, p1B, p1C, p1S, p1D];
+    let p2Ships = [p2AC, p2B, p2C, p2S, p2D];
+    const ships = {
+      p1Array: p1Ships,
+      p2Array: p2Ships,
     };
-
-    evalSunk = () => {
-        if (this.timesHit === this.length) {
-            this.isSunk = 'Yes';
-        } else {
-            return
-        }
-    }
+    return ships;
+  };
 }
 
-export {Ship}
+export { Ship };
