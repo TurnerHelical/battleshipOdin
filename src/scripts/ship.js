@@ -32,21 +32,18 @@ class Ship {
     }
   };
 
-  createShips = () => {
-    const p1AC = new Ship("p1AircraftCarrier", 5);
-    const p2AC = new Ship("p2AircraftCarrier", 5);
-    const p1B = new Ship("p1Battleship", 4);
-    const p2B = new Ship("p2Battleship", 4);
-    const p1C = new Ship("p1Cruiser", 3);
-    const p2C = new Ship("p2Cruiser", 3);
-    const p1S = new Ship("p1Submarine", 3);
-    const p2S = new Ship("p2Submarine", 3);
-    const p1D = new Ship("p1Destroyer", 2);
-    const p2D = new Ship("p2Destroyer", 2);
-    const ships = {
-      p1Array: [p1AC, p1B, p1C, p1S, p1D],
-      p2Array: [p2AC, p2B, p2C, p2S, p2D]
-    };
+  createShips = (player) => {
+    const airCarr = new Ship(`${player}AircraftCarrier`, 5);
+    
+    const battle = new Ship(`${player}Battleship`, 4);
+    
+    const cruise = new Ship(`${player}Cruiser`, 3);
+    
+    const submarine = new Ship(`${player}Submarine`, 3);
+   
+    const destroyer = new Ship(`${player}Destroyer`, 2);
+  
+    const ships = [airCarr, battle, cruise, submarine, destroyer];
     return ships;
   };
 }
