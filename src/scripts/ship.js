@@ -43,8 +43,6 @@ class Ship {
     const p2S = new Ship("p2Submarine", 3);
     const p1D = new Ship("p1Destroyer", 2);
     const p2D = new Ship("p2Destroyer", 2);
-    let p1Ships = [p1AC, p1B, p1C, p1S, p1D];
-    let p2Ships = [p2AC, p2B, p2C, p2S, p2D];
     const ships = {
       p1Array: [p1AC, p1B, p1C, p1S, p1D],
       p2Array: [p2AC, p2B, p2C, p2S, p2D]
