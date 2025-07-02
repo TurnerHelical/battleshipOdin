@@ -35,6 +35,22 @@ class Gameboard {
     }
   };
 
+  allSunkEval = (player) => {
+    const ships = this.boards[`${player}Ships`];
+
+    if (ships.every(ship => ship.isSunk === true)) {
+        this.declareWinner(player);
+        return true
+    } else {
+        return
+    }
+  }
+
+  declareWinner = (player) => {
+    console.log('Player 2 wins')
+    
+  }
+
   receiveAttack = (attackCoords, player) => {
     const ships = this.boards[`${player}Ships`];
     let hit = false;

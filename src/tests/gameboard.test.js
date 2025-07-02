@@ -17,5 +17,12 @@ describe('gameboard class tests', () => {
         
     })
 
-
+    test('Eval if all ships are sunk on a players side', () => {
+        const board = new Gameboard();
+        const testShip = new Ship('Rowboat', 1);
+        testShip.location = ['A5'];
+        board.boards.p1Ships = [testShip];
+        board.receiveAttack('A5', 'p1');
+        expect(board.allSunkEval('p1')).toBe(true)
+    })
 })
