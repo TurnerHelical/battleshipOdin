@@ -4,30 +4,31 @@ class Ship {
     this.length = length;
     this.timesHit = 0;
     this.hitLocation = [];
-    this.isSunk = "No";
-    this.location = "";
+    this.isSunk = false;
+    this.location = [];
   }
 
   hit = (coords) => {
     
-    if (this.hitLocation.find(coords) === coords) {
+    if (this.hitLocation.includes(coords)) {
         console.log('You already tried here! Try again.');
         // Allow user to try a different spot
-    } else if (this.isSunk === 'Yes') {
+    } else if (this.isSunk) {
         console.log('this ship is sunk but you should not see this message')
-       
+        return
     } else {
         this.timesHit += 1;
         this.hitLocation.push(coords);
+        return
     }
   };
 
   evalSunk = () => {
     if (this.timesHit === this.length) {
-      this.isSunk = "Yes";
-      return 'true';
+      this.isSunk = true;
+      return true;
     } else {
-      return;
+      return false;
     }
   };
 
@@ -45,8 +46,8 @@ class Ship {
     let p1Ships = [p1AC, p1B, p1C, p1S, p1D];
     let p2Ships = [p2AC, p2B, p2C, p2S, p2D];
     const ships = {
-      p1Array: p1Ships,
-      p2Array: p2Ships,
+      p1Array: [p1AC, p1B, p1C, p1S, p1D],
+      p2Array: [p2AC, p2B, p2C, p2S, p2D]
     };
     return ships;
   };

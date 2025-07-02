@@ -7,8 +7,8 @@ describe("ship tests", () => {
     expect(testShip.shipName).toBe("Rowboat");
     expect(testShip.length).toBe(2);
     expect(testShip.timesHit).toBe(0);
-    expect(testShip.isSunk).toBe("No");
-    expect(testShip.location).toBe("");
+    expect(testShip.isSunk).toBe(false);
+    expect(testShip.location).toEqual([]);
   });
 
   test("timesHit should go up by 1", () => {
@@ -19,17 +19,19 @@ describe("ship tests", () => {
 
   test("if timesHit = length, isSunk should be yes", () => {
     const testShip = new Ship("Rowboat", 2);
-    testShip.hit();
-    testShip.hit();
+    testShip.location.push('A5');
+    testShip.location.push('B5');
+    testShip.hit('A5');
+    testShip.hit('B5');
     testShip.evalSunk();
-    expect(testShip.isSunk).toBe("Yes");
+    expect(testShip.isSunk).toBe(true);
   });
 
   test("if timesHit < length, do nothing", () => {
     const testShip = new Ship("Rowboat", 2);
     testShip.hit();
     testShip.evalSunk();
-    expect(testShip.isSunk).toBe("No");
+    expect(testShip.isSunk).toBe(false);
   });
 
   test("ships are created for both users", () => {

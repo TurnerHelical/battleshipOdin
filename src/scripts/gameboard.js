@@ -3,11 +3,12 @@ import { Ship } from "./ship.js";
 const shipClass = new Ship();
 
 class Gameboard {
-  ships = shipClass.createShips();
-  p1Ships = ships.p1Array;
-  p2Ships = ships.p2Array;
-  p1Misses = [];
-  p2Misses = [];
+  boards = {
+  p1Ships : shipClass.createShips().p1Array,
+  p2Ships : shipClass.createShips().p2Array,
+  p1Misses : [],
+  p2Misses : []
+  }
 
   initBoard = () => {
     placeShips(p1Ships);
@@ -18,57 +19,41 @@ class Gameboard {
 
   recordMiss = (coords, player) => {
     if (player === 'p1') {
-        if (p1Misses.find(coords) === coords) {
+        if (this.boards.p1Misses.includes(coords)) {
             console.log('Already tried this spot, try again');
             // Allow user to select another spot to attack
         } else {
-            p1Misses.push(coords);
+            this.boards.p1Misses.push(coords);
         }
     } else {
-        if (p2Misses.find(coords) === coords) {
+        if (this.boards.p2Misses.includes(coords)) {
             console.log('Already tried this spot, try again');
             // Allow user ot select another spot to attack
         } else {
-            p2Misses.push(coords);
+            this.boards.p2Misses.push(coords);
         }
     }
   };
 
   receiveAttack = (attackCoords, player) => {
-    if (player === "p1") {
-      p1Ships.forEach((ship) => {
-        if (ship.location.find(attackCoords) === attackCoords) {
-          ship.hit(attackCoords);
-          // add coords to the hit list
-          if (ship.evalSunk() === "Yes") {
-            console.log(`You sank the opponents ${ship.shipName}`);
-            // Make an X on player 1's sunk ship
-          } else {
-            console.log(`You hit the opponents ${ship.shipName}`);
-            // update sprite to reflect the hit
-          }
+    const ships = this.boards[`${player}Ships`];
+    let hit = false;
+  
+    ships.forEach((ship) => {
+      if (ship.location.includes(attackCoords)) {
+        ship.hit(attackCoords);
+        hit = true;
+  
+        if (ship.evalSunk()) {
+          console.log(`You sank the opponent's ${ship.shipName}`);
         } else {
-          recordMiss(attackCoords, player);
-          // Add the coords to the missed list
+          console.log(`You hit the opponent's ${ship.shipName}`);
         }
-      });
-    } else {
-      p2Ships.forEach((ship) => {
-        if (ship.location.find(attackCoords) === attackCoords) {
-          ship.hit(attackCoords);
-          // add coords to the hit list
-          if (ship.evalSunk() === "Yes") {
-            console.log(`You sank the opponents ${ship.shipName}!`);
-            // Make an X on player 2's sunk ship
-          } else {
-            console.log(`You hit the opponents ${ship.Shipname}!`);
-            // update sprite to reflect the hit
-          }
-        } else {
-          recordMiss(attackCoords, player);
-          // Add the coords to the missed list
-        }
-      });
+      }
+    });
+  
+    if (!hit) {
+      this.recordMiss(attackCoords, player);
     }
   };
 }
