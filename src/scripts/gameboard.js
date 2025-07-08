@@ -3,19 +3,7 @@ import { Ship } from "./ship.js";
 const shipClass = new Ship();
 
 class Gameboard {
-  boards = {
-  p1Ships : shipClass.createShips().p1Array,
-  p2Ships : shipClass.createShips().p2Array,
-  p1Misses : [],
-  p2Misses : []
-  }
 
-  initBoard = () => {
-    placeShips(p1Ships);
-    placeShips(p2Ships);
-  };
-
-  placeShips = () => {};
 
   recordMiss = (coords, player) => {
     if (player === 'p1') {

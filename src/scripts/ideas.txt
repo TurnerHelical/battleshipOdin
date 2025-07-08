@@ -1,0 +1,18 @@
+Player.js is the link from index to the rest of the program
+
+each player has their own gameboard and each player tracks hits and misses for themselves
+
+the gameboard tracks ship location and reports the hits or miss to the player classes to record them
+
+if player tries to select same spot as previous, throw error and allow them to pick again
+
+ships.js tracks the individual ships and if they've been hit or sunk and reports to the player how many ships have been sunk and how many are remaining
+
+when a player hits a ship report to ship.js for that individual ship and record the hit in the player class, check if it was sunk and if so check if it was the last ship remaining
+
+if last ship report that the other player won, create an option for the players to restart the game
+
+create a computer player and make the logic for it
+
+write the logic to let the players select their ship locations and record it for each ship
+
