@@ -11,20 +11,20 @@ class Player {
         this.missCoords = [];
         this.hitCoords = [];
         this.ships = shipFunc.createShips(this.playerNumber);
-        this.board = new Gameboard();
+        this.board = new Gameboard(this.ships);
         this.opponent = null;
     }
 
-    setOpponent(opponentPlayer) {
+    setOpponent = (opponentPlayer) => {
         this.opponent = opponentPlayer;
-        
+
     }
 
-    makeAttack(coords) {
-        
+    makeAttack = (coords) => {
+        this.opponent.board.receiveAttack(coords);
     }
 
-    getPlayer() {
+    getPlayer = () => {
         return this
     }
 }
