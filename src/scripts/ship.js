@@ -19,7 +19,7 @@ class Ship {
   hit = (coords) => {
     
     if (this.hitLocation.includes(coords)) {
-        console.log('You already tried here! Try again.');
+        return true
         // Allow user to try a different spot
     } else if (this.isSunk) {
         console.log('this ship is sunk but you should not see this message')
@@ -27,7 +27,7 @@ class Ship {
     } else {
         this.timesHit += 1;
         this.hitLocation.push(coords);
-        return
+        return false
     }
   };
 

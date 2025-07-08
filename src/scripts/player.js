@@ -21,7 +21,13 @@ class Player {
     }
 
     makeAttack = (coords) => {
-        this.opponent.board.receiveAttack(coords);
+        let hit = this.opponent.board.receiveAttack(coords);
+        if (hit === true) {
+            this.hitCoords.push(coords);
+        } else {
+            this.missCoords.push(coords);
+        }
+
     }
 
     getPlayer = () => {
