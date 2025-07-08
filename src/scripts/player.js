@@ -17,9 +17,7 @@ class Player {
 
     setOpponent(opponentPlayer) {
         this.opponent = opponentPlayer;
-        this.board.boards = {
-
-        }
+        
     }
 
     makeAttack(coords) {

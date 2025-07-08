@@ -8,6 +8,14 @@ class Ship {
     this.location = [];
   }
 
+  placeShip = (locationArray) => {
+    // place the ship at the given coords and record it into the ship location
+    // ie Submarine should have an array of 3 locations and should look like
+    // [A5,A4,A3],
+    return this.location = locationArray;
+
+  }
+
   hit = (coords) => {
     
     if (this.hitLocation.includes(coords)) {
@@ -32,16 +40,16 @@ class Ship {
     }
   };
 
-  createShips = (player) => {
-    const airCarr = new Ship(`${player}AircraftCarrier`, 5);
+  createShips = () => {
+    const airCarr = new Ship(`AircraftCarrier`, 5);
     
-    const battle = new Ship(`${player}Battleship`, 4);
+    const battle = new Ship(`Battleship`, 4);
     
-    const cruise = new Ship(`${player}Cruiser`, 3);
+    const cruise = new Ship(`Cruiser`, 3);
     
-    const submarine = new Ship(`${player}Submarine`, 3);
+    const submarine = new Ship(`Submarine`, 3);
    
-    const destroyer = new Ship(`${player}Destroyer`, 2);
+    const destroyer = new Ship(`Destroyer`, 2);
   
     const ships = [airCarr, battle, cruise, submarine, destroyer];
     return ships;
