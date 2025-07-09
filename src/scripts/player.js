@@ -24,8 +24,11 @@ class Player {
         let hit = this.opponent.board.receiveAttack(coords);
         if (hit === true) {
             this.hitCoords.push(coords);
-        } else {
+            this.opponent.board.allSunkEval(this.name)
+        } else if (hit === false) {
             this.missCoords.push(coords);
+        } else if (hit === 'repeat') {
+            // do nothing and have user select another position, 
         }
 
     }

@@ -20,7 +20,6 @@ class Ship {
     
     if (this.hitLocation.includes(coords)) {
         return true
-        // Allow user to try a different spot
     } else if (this.isSunk) {
         console.log('this ship is sunk but you should not see this message')
         return

@@ -7,8 +7,17 @@ class Gameboard {
     this.shipArray = shipArray;
   }
 
-  allSunkEval = (player) => {};
-  declareWinner = (player) => {};
+  allSunkEval = () => {
+    let allSunk = this.shipArray.every(ship => ship.isSunk);
+    if (allSunk === true) {
+      this.declareWinner();
+    } else {
+      return
+    }
+  };
+  declareWinner = (player) => {
+    console.log(`${player} wins the game!`)
+  };
 
   receiveAttack = (attackCoords) => {
     let hit = false;
