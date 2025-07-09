@@ -7,10 +7,10 @@ class Gameboard {
     this.shipArray = shipArray;
   }
 
-  allSunkEval = () => {
+  allSunkEval = (player) => {
     let allSunk = this.shipArray.every(ship => ship.isSunk);
-    if (allSunk === true) {
-      this.declareWinner();
+    if (allSunk) {
+      this.declareWinner(player);
     } else {
       return
     }
