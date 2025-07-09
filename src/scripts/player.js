@@ -5,7 +5,7 @@ const shipFunc = new Ship();
 
 
 class Player {
-    constructor(name, playerNumber) {
+    constructor(name, playerNumber, isComputer) {
         this.name = name;
         this.playerNumber = playerNumber;
         this.missCoords = [];
@@ -13,6 +13,7 @@ class Player {
         this.ships = shipFunc.createShips(this.playerNumber);
         this.board = new Gameboard(this.ships);
         this.opponent = null;
+        this.isComputer = isComputer;
     }
 
     setOpponent = (opponentPlayer) => {

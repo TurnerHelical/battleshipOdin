@@ -16,3 +16,10 @@ create a computer player and make the logic for it
 
 write the logic to let the players select their ship locations and record it for each ship
 
+
+in page.js I need to create a board for each user to place ships and write logic to automatically do it for computer users
+figure out how to make drag and drop ships work on the board and make them rotatable 
+then if playing the computer generate 2 boards for the player, one representing the opponent board, not showing ship placement but showing the user's hit and misses
+the second board should have the locations of the users ships and where the computer/other players hits and misses are tracked 
+if playing with 2 human players set up a screen between turns to hide the ship placements until the second player is ready
+track turns 

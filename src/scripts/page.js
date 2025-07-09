@@ -1,5 +1,7 @@
 import { Dom } from "./utils";
+import { Player } from "./player";
 
+const playerFunc = new Player();
 const util = new Dom();
 
 class Page {
@@ -20,6 +22,89 @@ class Page {
             // the second board will show the locations of the players ships and where the second player has tried to attack
         } else {
             return
+        };
+    };
+
+
+    displayGameboard = (playerNumber) => {
+        util.clearContent('#contentBox');
+        this.generateBoard('#contentBox')
+
+    }
+
+    
+
+    generateBoard = (parentSelector, boardId) => {
+        const parent = util.findElement(parentSelector);
+        const board = document.createElement('div');
+        board.classList.add('gameboard');
+        board.setAttribute('id', boardId);
+    
+        const rows = 'ABCDEFGHIJ';
+        for (let r = 0; r < 10; r++) {
+            for (let c = 1; c <= 10; c++) {
+                const cell = document.createElement('div');
+                const coord = `${rows[r]}${c}`;
+                cell.classList.add('cell');
+                cell.setAttribute('data-coord', coord);
+                cell.setAttribute('id', `${boardId}-${coord}`);
+                board.appendChild(cell);
+            }
         }
-    } 
+    
+        parent.appendChild(board);
+    };
+
+    createPlayers = (typeOfPlayer) => {
+        let playerForm = util.findElement('#contentBox');
+        playerForm.innerHTML = `
+        <div id="playerCreate">
+            <h2>Create Player 1</h2>
+        </div>
+
+        <form>
+            <div>
+                <label for="name">What is your name?</label>
+                <input type="text" name="name?" id="playerName">
+            </div>
+            <button type="submit">Submit</button>
+        </form>`;
+        const submit = util.findElement('#playerForm');
+        const player1 = submit.addEventListener('submit',this.playerNameFormSubmit(e, 'p1'));
+        const player2 = this.player2Create(typeOfPlayer);
+        let playerArray = [player1, player2]
+        return playerArray
+    };
+
+    playerNameFormSubmit = (e, playerNumber) => {
+        e.preventDefault()
+        const playerNameValue = util.findElement('#playerName').value;
+        const player = new Player(`${playerNameValue}`, playerNumber, false)
+        return player
+    };
+
+    player2Create = (playerType) => {
+        if (playerType === 'computer') {
+            const player2 = new Player('Computer', 'p2', true);
+            return player2
+        } else if (playerType === 'secondPlayer') {
+            let playerForm = util.findElement('#contentBox');
+            util.clearContent(playerForm);
+            playerForm.innerHTML = `
+        <div id="playerCreate">
+            <h2>Create Player 2</h2>
+        </div>
+
+        <form>
+            <div>
+                <label for="name">What is your name?</label>
+                <input type="text" name="name?" id="playerName">
+            </div>
+            <button type="submit">Submit</button>
+        </form>`;
+            const submit = util.findElement('#playerForm');
+            const player2 = submit.addEventListener('submit', this.playerNameFormSubmit(e,'p2'));
+            return player2
+        };
+    };
 }
