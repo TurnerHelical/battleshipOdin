@@ -6,14 +6,27 @@ const util = new Dom();
 
 class Page {
 
-    changeContentBox = (this) => {
+    init = () => {
+        const buttonCtr = util.findElement('#buttonCtr');
+        buttonCtr.addEventListener('click', (e) => this.changeContentBox(e));
+    }
+
+
+    changeContentBox = (e) => {
+        const id = e.target.id
         util.clearContent('#contentBox');
-        if (this.id === 'computerPlayer') {
+        util.toggleClass('#contentBox','placeShips')
+        if (id === 'computerPlayer') {
             // ask for player name and initiate player objects
             // create a board on the screen and tell the user to place their ships
             // write logic for the computer to auto select ship placement
+            let playerArray = this.createPlayers('computer');
+            let player1 = playerArray[0];
+            let player2 = playerArray[1];
+            this.displayGameboard('p1');
+
             
-        } else  if (this.id === 'secondPlayer') {
+        } else  if (id === 'secondPlayer') {
             // blank out the screen first and ask the second player to give the first player privacy to place ships and ask for the first players name
             // then when done and name input, generate the first players board and allow them to place ships
             // once done have the screen blank and then ask the second player to take over and the first to give privacy and for the second players name
@@ -28,7 +41,9 @@ class Page {
 
     displayGameboard = (playerNumber) => {
         util.clearContent('#contentBox');
-        this.generateBoard('#contentBox')
+        util.toggleClass('#contentBox','placeShips');
+        this.generateBoard('#contentBox', `${playerNumber}-board`);
+        
 
     }
 
@@ -62,7 +77,7 @@ class Page {
             <h2>Create Player 1</h2>
         </div>
 
-        <form>
+        <form id='playerForm'>
             <div>
                 <label for="name">What is your name?</label>
                 <input type="text" name="name?" id="playerName">
@@ -70,7 +85,7 @@ class Page {
             <button type="submit">Submit</button>
         </form>`;
         const submit = util.findElement('#playerForm');
-        const player1 = submit.addEventListener('submit',this.playerNameFormSubmit(e, 'p1'));
+        const player1 = submit.addEventListener('submit',(e) => this.playerNameFormSubmit(e,'p1'));
         const player2 = this.player2Create(typeOfPlayer);
         let playerArray = [player1, player2]
         return playerArray
@@ -95,7 +110,7 @@ class Page {
             <h2>Create Player 2</h2>
         </div>
 
-        <form>
+        <form id='playerForm'>
             <div>
                 <label for="name">What is your name?</label>
                 <input type="text" name="name?" id="playerName">
@@ -103,8 +118,10 @@ class Page {
             <button type="submit">Submit</button>
         </form>`;
             const submit = util.findElement('#playerForm');
-            const player2 = submit.addEventListener('submit', this.playerNameFormSubmit(e,'p2'));
+            const player2 = submit.addEventListener('submit', (e) => this.playerNameFormSubmit(e,'p2'));
             return player2
         };
     };
+    
 }
+export { Page }
