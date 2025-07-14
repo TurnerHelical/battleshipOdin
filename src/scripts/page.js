@@ -11,6 +11,12 @@ class Page {
         buttonCtr.addEventListener('click', (e) => this.changeContentBox(e));
     }
 
+    startGame = (players) => {
+        //start turn one with p1
+        this.displayGameboard(players[0].playerNumber, players);
+        console.log(players)
+    }
+
 
     changeContentBox = (e) => {
         const id = e.target.id
@@ -19,6 +25,7 @@ class Page {
         if (id === 'computerPlayer') {
             this.createPlayers('computer', (playerArray) => {
                 const [player1,player2] = playerArray;
+                this.startGame(playerArray);
             })
             }
         
@@ -26,7 +33,7 @@ class Page {
         else  if (id === 'secondPlayer') {
             this.createPlayers('secondPlayer', (playerArray) => {
                 const [player1,player2] = playerArray;
-                console.log(playerArray);
+                this.startGame(playerArray);
             });
             
             // blank out the screen first and ask the second player to give the first player privacy to place ships and ask for the first players name
@@ -35,17 +42,15 @@ class Page {
             // generate a board for the second player and allow them to place ships
             // once done, switch to player 1's turn and show 2 boards on screen, a blank one that tracks where the user has attacked and where they will select spots
             // the second board will show the locations of the players ships and where the second player has tried to attack
-        } else {
-            return
         };
     };
 
 
-    displayGameboard = (playerNumber) => {
+    displayGameboard = (playerNumber, playerArray) => {
         util.clearContent('#contentBox');
-        util.toggleClass('#contentBox','placeShips');
+        // util.toggleClass('#contentBox','placeShips');
         this.generateBoard('#contentBox', `${playerNumber}-board`);
-        this.loadBoardData();
+        this.loadBoardData(playerNumber, playerArray);
         
 
     }
@@ -106,6 +111,8 @@ class Page {
             const name = util.findElement('#playerName').value;
             const player1 = new Player(name, 'p1', false);
             this.player2Create(typeOfPlayer, (player2) => {
+                player1.setOpponent(player2);
+                player2.setOpponent(player1);
                 onPlayersReady([player1, player2]);
             });
         });
@@ -128,7 +135,7 @@ class Page {
         <form id="playerForm">
             <div>
                 <label for="name">What is your name?</label>
-                <input type="text" name="name" id="playerName">
+                <input type="text" name="name?" id="playerName">
             </div>
             <button type="submit">Submit</button>
         </form>`;
