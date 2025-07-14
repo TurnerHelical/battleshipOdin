@@ -29,12 +29,25 @@ img {
 
 main {
     display: grid;
-    grid-template: 1fr / 1fr  2fr  1fr;
+    grid-template: .2fr 2fr / 1fr  2fr  1fr;
     margin-top: 20px;
 }
 
-#contentBox {
+#titleCtr {
     grid-area: 1 / 2 / 2 / 3;
+    background-color: white;
+    box-shadow: 1px 1px 4px white, -1px -1px 4px white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#title {
+    font-size: 32px;
+}
+
+#contentBox {
+    grid-area: 2 / 2 / 3 / 3;
     text-align: center;
     box-shadow: 1px 1px 4px white, -1px -1px 4px white;
     padding: 20px 10px;
@@ -106,6 +119,7 @@ form button:hover {
     grid-template-rows: repeat(10, 40px);
     gap: 2px;
     justify-content: center;
+    padding: 10px 0px;
 }
   
 .cell {

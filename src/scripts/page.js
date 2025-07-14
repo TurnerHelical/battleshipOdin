@@ -13,8 +13,14 @@ class Page {
 
     startGame = (players) => {
         //start turn one with p1
+        const title = util.findElement('#title');
+        title.innerHTML= `${players[0].name} place your ships`;
         this.displayGameboard(players[0].playerNumber, players);
-        console.log(players)
+        
+    }
+
+    changeTurn = () => {
+
     }
 
 
@@ -48,7 +54,6 @@ class Page {
 
     displayGameboard = (playerNumber, playerArray) => {
         util.clearContent('#contentBox');
-        // util.toggleClass('#contentBox','placeShips');
         this.generateBoard('#contentBox', `${playerNumber}-board`);
         this.loadBoardData(playerNumber, playerArray);
         
@@ -71,6 +76,8 @@ class Page {
 
     generateBoard = (parentSelector, boardId) => {
         const parent = util.findElement(parentSelector);
+        const title = document.createElement('h2');
+        title.innerHTML = ``
         const board = document.createElement('div');
         board.classList.add('gameboard');
         board.setAttribute('id', boardId);
