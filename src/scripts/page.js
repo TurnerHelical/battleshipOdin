@@ -13,9 +13,7 @@ class Page {
 
     startGame = (players) => {
         //start turn one with p1
-        const title = util.findElement('#title');
-        title.innerHTML= `${players[0].name} place your ships`;
-        this.displayGameboard(players[0].playerNumber, players);
+        this.placeShipFunc(players[0]);
         
     }
 
@@ -23,7 +21,51 @@ class Page {
 
     }
 
+    placeShipFunc = (player) => {
+        const title = util.findElement('#title');
+        title.innerHTML= `${player.name} place your ships`;
+        this.displayGameboard(player);
+        const board = util.findElement(`#${player.playerNumber}-board`)
+        util.createAndAppend('#contentBox', 'div', 'id', 'shipCtr');
+        for (let ship of player.ships) {
+            const shipImage = util.createAndAppend('#shipCtr', 'img', 'id', `${ship.shipName}`);
+            shipImage.setAttribute('src', `../images/${ship.shipName}Image.png`);
+            shipImage.setAttribute('draggable', 'true');
+            shipImage.addEventListener('dragstart',(e) => {
+                const id = e.target.id;
+                const matchedShip = (player.ships.find(ship => ship.shipName === id)) 
+                if (matchedShip) {
+                    const length = matchedShip.length;
+                    e.dataTransfer.setData('image/png', e.target.id);
+                    let img = new Image();
+                    img.src = `../images/${matchedShip.shipName}.png`;
+                    e.dataTransfer.setDragImage(img, 10, 10);
+        
+                // the ships should be draggable and an image of the ship should show it attached to the mouse, when the mouse is hovering over the gameboard
+                // it should highlight how many cells this ship takes
+                // if the ship doesn't fit in the cells user is hovering over or it would overlap another ship, throw a visual error
+                // when ship is dropped onto the board, the ship is visually placed on the board
+                // the cells are recorded as the location for the ship in the location array
+            }
+        })
+     }
+        board.addEventListener('drop', (e) => {
+            e.preventDefault();
+            const shipId = e.dataTransfer.getData('image/png');
+            const ship = player.ships.find(s => s.shipName === shipId);
 
+            if (ship) {
+                console.log(`Dropped: ${ship.shipName}`);
+            // You'll add visual placement and location recording here
+            }
+        });
+        
+        board.addEventListener('dragover', (e) => {
+            e.preventDefault()
+        
+        });
+    }
+    
     changeContentBox = (e) => {
         const id = e.target.id
         util.clearContent('#contentBox');
@@ -52,21 +94,21 @@ class Page {
     };
 
 
-    displayGameboard = (playerNumber, playerArray) => {
+    displayGameboard = (player) => {
         util.clearContent('#contentBox');
-        this.generateBoard('#contentBox', `${playerNumber}-board`);
-        this.loadBoardData(playerNumber, playerArray);
+        this.generateBoard('#contentBox', `${player.playerNumber}-board`);
+        this.loadBoardData(player);
         
 
     }
 
-    loadBoardData = (playerNumber, playerArray) => {
-        if (playerNumber === 'p1') {
-            for (let ship of playerArray[0].ships) {
+    loadBoardData = (player) => {
+        if (player.playerNumber === 'p1') {
+            for (let ship of player.ships) {
                 //place the ships at the ship.location coords, should have coords matching the hitpoints of the ship/ player 1
             }
         } else {
-            for (let ship of playerArray[1].ships) {
+            for (let ship of player.ships) {
                 //place player 2 ships at the coords in playerArray.ships.location
             }
         }
@@ -156,5 +198,6 @@ class Page {
         };
     };
     
+    
 }
-export { Page }
+export { Page };

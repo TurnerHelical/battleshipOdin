@@ -40,15 +40,15 @@ class Ship {
   };
 
   createShips = () => {
-    const airCarr = new Ship(`AircraftCarrier`, 5);
+    const airCarr = new Ship(`aircraftCarrier`, 5);
     
-    const battle = new Ship(`Battleship`, 4);
+    const battle = new Ship(`battleship`, 4);
     
-    const cruise = new Ship(`Cruiser`, 3);
+    const cruise = new Ship(`cruiser`, 3);
     
-    const submarine = new Ship(`Submarine`, 3);
+    const submarine = new Ship(`submarine`, 3);
    
-    const destroyer = new Ship(`Destroyer`, 2);
+    const destroyer = new Ship(`destroyer`, 2);
   
     const ships = [airCarr, battle, cruise, submarine, destroyer];
     return ships;
