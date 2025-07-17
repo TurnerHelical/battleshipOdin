@@ -134,6 +134,18 @@ form button:hover {
     cursor: pointer;
 }
 
+#shipCtr {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.shipImage {
+    padding: 10px;
+    height: 150px;
+    width: 150px;
+}
+
 footer {
     display: flex;
     flex-direction: column;

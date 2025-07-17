@@ -3,6 +3,7 @@ import { Player } from "./player";
 
 const playerFunc = new Player();
 const util = new Dom();
+const images = require.context ( '../images', false, /\.png$/);
 
 class Page {
 
@@ -29,8 +30,9 @@ class Page {
         util.createAndAppend('#contentBox', 'div', 'id', 'shipCtr');
         for (let ship of player.ships) {
             const shipImage = util.createAndAppend('#shipCtr', 'img', 'id', `${ship.shipName}`);
-            shipImage.setAttribute('src', `../images/${ship.shipName}Image.png`);
+            shipImage.setAttribute('src',images(`./${ship.shipName}.png`));
             shipImage.setAttribute('draggable', 'true');
+            shipImage.setAttribute('class',`shipImage` );
             shipImage.addEventListener('dragstart',(e) => {
                 const id = e.target.id;
                 const matchedShip = (player.ships.find(ship => ship.shipName === id)) 
